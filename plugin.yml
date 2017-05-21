@@ -1,0 +1,19 @@
+name: NickName
+version: 1.0
+main: me.imanthe.plugins.NickName.NickNames
+
+commands:
+    nick:
+        description: Nickname related cmd
+    nicknames:
+        description: Nicknames help cmd
+
+permissions:
+    imanthe.nick.self:
+        description: Lets you change your nickname
+    imanthe.nick.other:
+        description: Lets you change someone else's nickname
+    imanthe.lookup:
+        description: Lets you look someone's real name up from their nickname
+    imanthe.nick:
+        description: You can change any nick 
