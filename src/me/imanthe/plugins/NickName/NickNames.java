@@ -49,7 +49,7 @@ public final class NickNames
     this.config = YamlConfiguration.loadConfiguration(this.configFile);
     this.nicks = YamlConfiguration.loadConfiguration(this.nicksFile);
     if (!this.config.contains("allow-duplicate-nicknames")) {
-      this.config.set("allow-duplicate-nicknames", Boolean.valueOf(false));
+      this.config.set("allow-duplicate-nicknames", false);
     }
     if (!this.config.contains("join-and-quit-message-colour")) {
       this.config.set("join-and-quit-message-colour", "&e");
@@ -80,22 +80,22 @@ public final class NickNames
     this.manager.saveNicks(this.nicksFile);
   }
   
-  public NickNameManager getNickManager()
+  public static NickNameManager getNickManager()
   {
     return this.manager;
   }
   
-  public String getJoinQuitMessageColour()
+  public static getJoinQuitMessageColour()
   {
     return this.jqMsgColour;
   }
   
-  public boolean allowDuplicates()
+  public static boolean allowDuplicates()
   {
     return this.duplicates;
   }
   
-  public YamlConfiguration getNicksConfig()
+  public static YamlConfiguration getNicksConfig()
   {
     return this.nicks;
   }
