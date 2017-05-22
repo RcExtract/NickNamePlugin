@@ -52,32 +52,32 @@ public final class NickCommand implements CommandExecutor
           player.sendMessage(ChatColor.GREEN + "Nickname successfully removed!");
           return true;
         }
-        return true;
-      }
-      if (args.length == 1 && !(args[0].equalsIgnoreCase("off"))
-      {
-        if (!player.hasPermission("imanthe.nick.other"))
+        if (args.length == 2 && args[0].equalsIgnoreCase("off"))
         {
-          player.sendMessage(ChatColor.RED + "You don't have permission to change others' nickname!");
+          if (!player.hasPermission("imanthe.nick.other"))
+          {
+            player.sendMessage(ChatColor.RED + "You don't have permission to change others' nickname!");
+            return true;
+          }
+          String other = args[1];
+          Player target = Bukkit.getPlayer(other);
+          if (target == null)
+          {
+            //Target equaling to null doesn't mean the player is offline. Perhaps that player doesn't even exist.
+            sender.sendMessage(ChatColor.RED + "Failed to find the player " + args[1] + "!");
+            return true;
+          }
+          if (!(this.nickManager.setNickName(target.getUniqueId(), null)))
+          {
+            sender.sendMessage(ChatColor.GRAY + "Couldn't disable nickname for " + ChatColor.RED + other);
+            return true;
+          }
+          target.setDisplayName(target.getName());
+          target.setPlayerListName(target.getName());
+          sender.sendMessage(ChatColor.GRAY + "Disabled nickname for " + ChatColor.RED + other);
+          player.sendMessage(ChatColor.GRAY + "Your nickname was disabled");
           return true;
         }
-        String other = args[1];
-        Player target = Bukkit.getPlayer(other);
-        if (target == null)
-        {
-          //Target equaling to null doesn't mean the player is offline. Perhaps that player doesn't even exist.
-          sender.sendMessage(ChatColor.RED + "Failed to find the player " + args[1] + "!");
-          return true;
-        }
-        if (!(this.nickManager.setNickName(target.getUniqueId(), null)))
-        {
-          sender.sendMessage(ChatColor.GRAY + "Couldn't disable nickname for " + ChatColor.RED + other);
-          return true;
-        }
-        target.setDisplayName(target.getName());
-        target.setPlayerListName(target.getName());
-        sender.sendMessage(ChatColor.GRAY + "Disabled nickname for " + ChatColor.RED + other);
-        player.sendMessage(ChatColor.GRAY + "Your nickname was disabled");
         return true;
       }
       if (args.length == 1)
