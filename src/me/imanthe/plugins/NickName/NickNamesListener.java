@@ -20,6 +20,8 @@ public class NickNamesListener
     this.jqMsgColour = plugin.getJoinQuitMessageColour();
   }
   
+  //HIGHEST means the listener has the lowest priority
+  //LOWEST means the listener has the highest priority
   @EventHandler(priority=EventPriority.HIGHEST)
   public void onPlayerJoin(PlayerJoinEvent event)
   {
